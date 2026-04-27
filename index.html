@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nahmatic bringt lokalen Handwerkern mehr Kundenanfragen – durch gezielte Meta Ads auf Facebook & Instagram. Lokal, persönlich, messbar.">
+  <title>Nahmatic – Mehr Kundenanfragen für Handwerker</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@700;800;900&family=Exo+2:wght@700;800;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #1a1710;
+      --bg-2:      #1f1b13;
+      --bg-card:   #242019;
+      --teal:      #e8880a;
+      --teal-dim:  rgba(232, 136, 10, 0.10);
+      --teal-glow: rgba(232, 136, 10, 0.06);
+      --teal-bdr:  rgba(232, 136, 10, 0.32);
+      --text:      #f2ede6;
+      --muted:     #a89880;
+      --border:    rgba(255, 235, 190, 0.07);
+      --display:   'Barlow', sans-serif;
+      --body:      'Outfit', sans-serif;
+      --max:       1200px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--display);
+      font-weight: 800;
+      line-height: 1.32;
+    }
+
+    .grain {
+      position: fixed;
+      inset: -50%;
+      width: 200%;
+      height: 200%;
+      pointer-events: none;
+      z-index: 9000;
+      opacity: 0.036;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 20px;
+    }
+
+    .r    { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.25,.46,.45,.94), transform .7s cubic-bezier(.25,.46,.45,.94); }
+    .r.d1 { transition-delay: .08s; }
+    .r.d2 { transition-delay: .16s; }
+    .r.d3 { transition-delay: .24s; }
+    .r.d4 { transition-delay: .32s; }
+    .r.d5 { transition-delay: .40s; }
+    .r.on { opacity: 1; transform: translateY(0); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      font-family: var(--body);
+      font-size: .85rem;
+      font-weight: 500;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--teal);
+      border: 1.5px solid var(--teal);
+      background: transparent;
+      padding: 11px 28px;
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color .25s;
+      border-radius: 6px;
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--teal);
+      transform: translateX(-101%);
+      transition: transform .32s cubic-bezier(.645,.045,.355,1);
+      z-index: 0;
+    }
+    .btn:hover::before { transform: translateX(0); }
+    .btn span { position: relative; z-index: 1; transition: color .25s; }
+    .btn:hover span, .btn:hover { color: #17140e; }
+
+    /* NAVBAR */
+    #nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 500;
+      padding: 22px 28px;
+      transition: background .35s, border-color .35s, padding .35s, backdrop-filter .35s;
+    }
+    #nav.s {
+      background: rgba(23,20,14,.92);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 16px 28px;
+    }
+    .nav-i {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo em { font-style: normal; color: var(--teal); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: .88rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .burger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      transition: all .3s;
+    }
+
+    #mob {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 490;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+    }
+    #mob.open { display: flex; }
+    #mob a {
+      font-family: var(--display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    #mob a:hover { color: var(--teal); }
+    #mob-close {
+      position: absolute;
+      top: 22px;
+      right: 28px;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      color: var(--muted);
+      cursor: pointer;
+      line-height: 1;
+    }
+    #mob-close:hover { color: var(--text); }
+
+    /* HERO */
+    #hero {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 140px 28px 110px;
+      position: relative;
+      overflow: visible;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(232,136,10,.06) 1px, transparent 1px);
+      background-size: 38px 38px;
+      pointer-events: none;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 750px;
+      height: 750px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,136,10,.045) 0%, transparent 65%);
+      top: 42%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 980px;
+    }
+    .hero-label {
+      display: inline-block;
+      font-size: .67rem;
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      border: 1px solid var(--teal-bdr);
+      padding: 6px 18px;
+      margin-bottom: 40px;
+    }
+    .hero-h1 {
+      font-size: clamp(2.8rem, 7.5vw, 6.4rem);
+      font-weight: 800;
+      letter-spacing: -.01em;
+      line-height: 1.32;
+      padding-bottom: 0.3em;
+      overflow: visible;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .hero-h1 .accent { color: var(--teal); }
+    .hero-sub {
+      font-size: clamp(.95rem, 2vw, 1.18rem);
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 560px;
+      margin: 0 auto 52px;
+      line-height: 1.75;
+    }
+    .hero-cta { font-size: .9rem; padding: 17px 46px; }
+
+    .scroll-ind {
+      position: absolute;
+      bottom: 38px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .scroll-line {
+      width: 1px;
+      height: 46px;
+      background: linear-gradient(to bottom, var(--teal), transparent);
+      animation: pulse-line 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse-line {
+      0%,100% { opacity: .2; transform: scaleY(1); }
+      50%      { opacity: .9; transform: scaleY(.65); }
+    }
+
+    /* SECTIONS */
+    .sec { padding: 112px 0; }
+    .sec-alt { background: var(--bg-2); }
+    .sec-head { margin-bottom: 54px; }
+    .sec-head.c { text-align: center; }
+    .sec-title {
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      letter-spacing: -.008em;
+      line-height: 1.32;
+      padding-bottom: 0.3em;
+      overflow: visible;
+      color: var(--text);
+      margin-bottom: 0;
+    }
+    .sec-desc {
+      font-size: 1rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.75;
+      max-width: 480px;
+    }
+    .sec-head.c .sec-desc { margin: 0 auto; }
+
+    /* PROBLEM */
+    .prob-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .prob-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 40px 32px 44px;
+      position: relative;
+      transition: border-color .3s, transform .35s;
+      border-radius: 12px;
+    }
+    .prob-card:hover {
+      border-color: rgba(232,136,10,.22);
+      transform: translateY(-5px);
+    }
+    .prob-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--teal), transparent);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .prob-card:hover::after { opacity: 1; }
+    .prob-num {
+      font-family: var(--display);
+      font-size: 4.5rem;
+      font-weight: 800;
+      color: rgba(232,136,10,.09);
+      line-height: 1;
+      display: block;
+      margin-bottom: 18px;
+    }
+    .prob-icon {
+      width: 38px;
+      height: 38px;
+      color: var(--teal);
+      margin-bottom: 20px;
+      display: block;
+    }
+    .prob-text {
+      font-size: .95rem;
+      color: rgba(242,237,230,.78);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    /* HOW IT WORKS */
+    .steps-wrap { position: relative; }
+    .steps-connector {
+      position: absolute;
+      top: 28px;
+      left: calc(16.67% + 20px);
+      right: calc(16.67% + 20px);
+      height: 1px;
+      background: linear-gradient(90deg, var(--teal-bdr), rgba(232,136,10,.08), var(--teal-bdr));
+    }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+    .step { text-align: center; padding: 0 12px; }
+    .step-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1.5px solid var(--teal-bdr);
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--teal);
+      margin: 0 auto 28px;
+      position: relative;
+      z-index: 1;
+    }
+    .step-title {
+      font-family: var(--display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .step-desc {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    /* PRICING – zwei Pakete + Add-on */
+    .price-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .price-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 40px 36px;
+      position: relative;
+      transition: transform .3s;
+      border-radius: 12px;
+    }
+    .price-card:hover { transform: translateY(-5px); }
+    .price-card.feat {
+      border-color: var(--teal-bdr);
+      background: linear-gradient(160deg, rgba(232,136,10,.05) 0%, var(--bg-card) 55%);
+    }
+    .feat-badge {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--teal);
+      color: #17140e;
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .price-name {
+      font-family: var(--display);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .price-tag-line {
+      font-size: .82rem;
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .price-currency { font-size: 1.1rem; color: var(--teal); font-weight: 600; }
+    .price-amount {
+      font-family: var(--display);
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1;
+    }
+    .price-once { font-size: .78rem; color: var(--muted); margin-bottom: 6px; }
+    .price-mo {
+      font-size: .88rem;
+      color: var(--teal);
+      font-weight: 500;
+      margin-bottom: 28px;
+    }
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 24px 0;
+    }
+    .feat-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+    .feat-list li { display: flex; align-items: flex-start; gap: 10px; font-size: .88rem; color: rgba(242,237,230,.82); font-weight: 300; line-height: 1.5; }
+    .feat-list li.inh { opacity: .5; }
+    .ck { color: var(--teal); flex-shrink: 0; font-size: .9rem; margin-top: 1px; }
+    .price-btn { width: 100%; }
+
+    /* Add-on card */
+    .addon-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--teal-bdr);
+      padding: 32px 36px;
+      border-radius: 12px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 32px;
+    }
+    .addon-label {
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+    .addon-title {
+      font-family: var(--display);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .addon-desc {
+      font-size: .85rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.6;
+      max-width: 560px;
+    }
+    .addon-price { text-align: right; flex-shrink: 0; }
+    .addon-price .price-amount { font-size: 2rem; }
+    .addon-feat-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+      margin-top: 16px;
+    }
+    .addon-feat-list li {
+      font-size: .82rem;
+      color: rgba(242,237,230,.65);
+      font-weight: 300;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ROI CALLOUT */
+    .roi-box {
+      background: var(--bg-card);
+      border: 1px solid var(--teal-bdr);
+      border-radius: 12px;
+      padding: 40px 48px;
+      text-align: center;
+      margin-top: 60px;
+    }
+    .roi-box p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.8;
+      max-width: 680px;
+      margin: 0 auto 20px;
+    }
+    .roi-box strong { color: var(--text); font-weight: 600; }
+    .roi-box .roi-num {
+      font-family: var(--display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: var(--teal);
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    /* PARTNER LOGOS */
+    .partners-section { padding: 76px 0; }
+    .partners-label {
+      text-align: center;
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 40px;
+      opacity: .6;
+    }
+    .partners-grid {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+    }
+    .partner-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 22px;
+      transition: border-color .25s, transform .25s;
+    }
+    .partner-badge:hover {
+      border-color: var(--teal-bdr);
+      transform: translateY(-2px);
+    }
+    .partner-badge svg { flex-shrink: 0; }
+    .partner-name {
+      font-size: .88rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: .02em;
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contact-sticky { position: sticky; top: 120px; }
+    .contact-detail { margin-top: 36px; display: flex; flex-direction: column; gap: 14px; }
+    .c-item { display: flex; align-items: center; gap: 12px; }
+    .c-icon {
+      width: 32px; height: 32px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--teal);
+      flex-shrink: 0;
+    }
+    .c-item span { font-size: .88rem; color: var(--muted); }
+
+    .fg { margin-bottom: 20px; }
+    .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+
+    label {
+      display: block;
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    input, select, textarea {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: .93rem;
+      font-weight: 300;
+      padding: 13px 15px;
+      outline: none;
+      transition: border-color .2s;
+      -webkit-appearance: none;
+      appearance: none;
+      border-radius: 6px;
+    }
+    select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--teal-bdr); }
+    input::placeholder, textarea::placeholder { color: rgba(242,237,230,.15); }
+    textarea { resize: vertical; min-height: 118px; }
+    .form-submit { width: 100%; margin-top: 6px; font-size: .88rem; padding: 16px 32px; }
+    #form-ok { display: none; margin-top: 16px; color: var(--teal); font-size: .85rem; letter-spacing: .04em; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 36px 28px; }
+    .foot-i {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .foot-logo { font-family: 'Exo 2', sans-serif; font-size: 1.2rem; font-weight: 800; letter-spacing: -.04em; color: var(--text); }
+    .foot-logo em { font-style: normal; color: var(--teal); }
+    .foot-copy { font-size: .8rem; color: var(--muted); }
+    .foot-links { display: flex; gap: 22px; }
+    .foot-links a { font-size: .8rem; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .foot-links a:hover { color: var(--text); }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .sec { padding: 80px 0; }
+      .hero-cta { padding: 15px 36px; }
+      .prob-grid, .steps-grid { grid-template-columns: 1fr; gap: 16px; }
+      .price-grid { grid-template-columns: 1fr; }
+      .steps-connector { display: none; }
+      .step { text-align: left; padding: 0; display: flex; align-items: flex-start; gap: 20px; }
+      .step-num { margin: 0; flex-shrink: 0; }
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .contact-sticky { position: static; }
+      .frow { grid-template-columns: 1fr; gap: 0; }
+      .nav-links, .nav-cta-wrap { display: none; }
+      .burger { display: flex; }
+      .addon-card { grid-template-columns: 1fr; gap: 20px; }
+      .addon-price { text-align: left; }
+    }
+
+    @media (max-width: 600px) {
+      .sec { padding: 64px 0; }
+      .wrap { padding: 0 20px; }
+      .hero-h1 { letter-spacing: -.03em; }
+      .prob-card { padding: 32px 24px 36px; }
+      .price-card { padding: 32px 24px; }
+      .roi-box { padding: 32px 24px; }
+      .foot-i { flex-direction: column; text-align: center; }
+      .foot-links { justify-content: center; }
+      .partners-grid { gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <div class="nav-i">
+    <a href="#hero" class="logo">nah<em>matic</em></a>
+    <ul class="nav-links">
+      <li><a href="#problem">Das Problem</a></li>
+      <li><a href="#how">Wie's funktioniert</a></li>
+      <li><a href="#pricing">Pakete</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
+    <a href="#contact" class="btn nav-cta-wrap"><span>Anfragen prüfen</span></a>
+    <button class="burger" id="burger" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile overlay -->
+<div id="mob">
+  <button id="mob-close" aria-label="Menü schließen">✕</button>
+  <a href="#problem"  onclick="closeMob()">Das Problem</a>
+  <a href="#how"      onclick="closeMob()">Wie's funktioniert</a>
+  <a href="#pricing"  onclick="closeMob()">Pakete</a>
+  <a href="#contact"  onclick="closeMob()" style="color:var(--teal)">Anfragen prüfen →</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-label r">Neue Anfragen für Handwerker – direkt aus deiner Region</div>
+
+    <h1 class="hero-h1 r d1">
+      Mehr Anfragen.<br>
+      Weniger <span class="accent">Leerläufe.</span>
+    </h1>
+
+    <p class="hero-sub r d2">
+      Wir sorgen dafür, dass Hausbesitzer aus deiner Umgebung aktiv bei dir anfragen – während du auf der Baustelle bist.
+    </p>
+
+    <a href="#contact" class="btn hero-cta r d3"><span>Jetzt prüfen, wie viele Anfragen möglich sind</span></a>
+  </div>
+
+  <div class="scroll-ind">
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem" class="sec">
+  <div class="wrap">
+
+    <div class="sec-head r">
+      <span class="tag">Das klingt bekannt?</span>
+      <h2 class="sec-title">Warum dir täglich<br>Aufträge entgehen</h2>
+    </div>
+
+    <div class="prob-grid">
+
+      <div class="prob-card r d1">
+        <span class="prob-num">01</span>
+        <svg class="prob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <p class="prob-text">Wenn jemand einen Handwerker sucht, landet er bei deiner Konkurrenz – nicht bei dir. Nicht weil du schlechter bist, sondern weil du nicht sichtbar bist.</p>
+      </div>
+
+      <div class="prob-card r d2">
+        <span class="prob-num">02</span>
+        <svg class="prob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+        </svg>
+        <p class="prob-text">Während du arbeitest, versuchen Kunden dich zu erreichen – und nehmen dann einfach den nächsten Betrieb. Ohne Nachricht, ohne zweite Chance.</p>
+      </div>
+
+      <div class="prob-card r d3">
+        <span class="prob-num">03</span>
+        <svg class="prob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+        </svg>
+        <p class="prob-text">Viele Kunden entscheiden sich online, bevor sie überhaupt anrufen. Wer dort nicht überzeugend auftritt, wird gar nicht erst kontaktiert.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="sec sec-alt">
+  <div class="wrap">
+
+    <div class="sec-head c r">
+      <span class="tag">In drei Schritten</span>
+      <h2 class="sec-title">So bekommst du regelmäßig neue Anfragen</h2>
+      <p class="sec-desc">Einmal eingerichtet läuft alles – du machst deine Arbeit, neue Kunden melden sich.</p>
+    </div>
+
+    <div class="steps-wrap">
+      <div class="steps-connector"></div>
+      <div class="steps-grid">
+
+        <div class="step r d1">
+          <div class="step-num">01</div>
+          <div>
+            <h3 class="step-title">Wir richten alles ein</h3>
+            <p class="step-desc">Wir erstellen Anzeigen, die genau die Leute aus deiner Region erreichen, die gerade einen Handwerker suchen. Du musst nichts erklären oder selbst machen.</p>
+          </div>
+        </div>
+
+        <div class="step r d2">
+          <div class="step-num">02</div>
+          <div>
+            <h3 class="step-title">Hausbesitzer finden dich</h3>
+            <p class="step-desc">Menschen aus deiner Umgebung sehen dich genau dann, wenn sie Bedarf haben – auf Facebook und Instagram. Lokal, gezielt, ohne Streuverlust.</p>
+          </div>
+        </div>
+
+        <div class="step r d3">
+          <div class="step-num">03</div>
+          <div>
+            <h3 class="step-title">Dein Telefon klingelt</h3>
+            <p class="step-desc">Du bekommst regelmäßig neue Anfragen aus deiner Region – ohne dich darum kümmern zu müssen. Wir schauen jede Woche was besser werden kann.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="sec">
+  <div class="wrap">
+
+    <div class="sec-head c r">
+      <span class="tag">Transparente Preise</span>
+      <h2 class="sec-title">Das kostet dich neue Anfragen</h2>
+      <p class="sec-desc">Einmal eingerichtet läuft alles automatisch. Du zahlst nur für die Betreuung und dein Werbebudget – direkt an Meta, keine versteckten Kosten.</p>
+    </div>
+
+    <div class="price-grid">
+
+      <!-- Basis -->
+      <div class="price-card r d1">
+        <div class="price-name">Basis</div>
+        <div class="price-tag-line">Du hast bereits eine Website und ein Google-Profil – und willst mehr Anfragen.</div>
+        <div class="price-row">
+          <span class="price-currency">€</span><span class="price-amount">300–400</span>
+        </div>
+        <div class="price-once">einmalig (Setup)</div>
+        <div class="price-mo">+ 200–250 € / Monat Betreuung</div>
+        <div class="divider"></div>
+        <ul class="feat-list">
+          <li><span class="ck">✓</span> Anzeigen auf Facebook & Instagram einrichten</li>
+          <li><span class="ck">✓</span> Wir erreichen gezielt Menschen in deiner Umgebung mit aktuellem Bedarf</li>
+          <li><span class="ck">✓</span> 2–3 verschiedene Anzeigen-Varianten</li>
+          <li><span class="ck">✓</span> Wir sehen genau, welche Anfragen wirklich zu Kunden werden</li>
+          <li><span class="ck">✓</span> Wöchentliche Optimierung</li>
+          <li><span class="ck">✓</span> Monatliches Reporting in einfacher Sprache</li>
+        </ul>
+        <a href="#contact" class="btn price-btn" data-pkg="basis"><span>Basis wählen</span></a>
+      </div>
+
+      <!-- Premium -->
+      <div class="price-card feat r d2">
+        <div class="feat-badge">⭐ Empfohlen für den Start</div>
+        <div class="price-name">Premium</div>
+        <div class="price-tag-line">Du hast noch keine Online-Präsenz – wir bauen alles auf und bringen dann Kunden.</div>
+        <div class="price-row">
+          <span class="price-currency">€</span><span class="price-amount">700–900</span>
+        </div>
+        <div class="price-once">einmalig (Setup)</div>
+        <div class="price-mo">+ 250–300 € / Monat Betreuung</div>
+        <div class="divider"></div>
+        <ul class="feat-list">
+          <li class="inh"><span class="ck">✓</span> Alles aus Basis</li>
+          <li><span class="ck">✓</span> Landing Page aufbauen (mobil-optimiert)</li>
+          <li><span class="ck">✓</span> Google Business Profil einrichten</li>
+          <li><span class="ck">✓</span> Eintrag in 5–10 Verzeichnisse</li>
+          <li><span class="ck">✓</span> Bewertungsstrategie aufsetzen</li>
+        </ul>
+        <a href="#contact" class="btn price-btn" data-pkg="premium"><span>Premium wählen</span></a>
+      </div>
+
+    </div>
+
+    <!-- Add-on -->
+    <div class="addon-card r d3">
+      <div>
+        <div class="addon-label">Add-on</div>
+        <div class="addon-title">Automatisierung</div>
+        <div class="addon-desc">Für Kunden die schon genug Aufträge haben aber zu viel Zeit mit Papierkram verbringen. Anfragen automatisch bestätigen, Nachfass-Mails, Benachrichtigungen – ohne dass du einen Finger rührst.</div>
+        <ul class="addon-feat-list">
+          <li><span class="ck">✓</span> Anfrageformular (Tally)</li>
+          <li><span class="ck">✓</span> Auto-Bestätigung an Kunden</li>
+          <li><span class="ck">✓</span> Benachrichtigung an dich</li>
+          <li><span class="ck">✓</span> Nachfass-Mail nach X Tagen</li>
+          <li><span class="ck">✓</span> Optional: Airtable, WhatsApp, Rechnung</li>
+        </ul>
+      </div>
+      <div class="addon-price">
+        <div class="price-row" style="justify-content:flex-end;">
+          <span class="price-currency">€</span><span class="price-amount">200–300</span>
+        </div>
+        <div class="price-once">einmalig</div>
+        <div class="price-mo" style="margin-bottom:16px;">+ 60–80 € / Monat</div>
+        <a href="#contact" class="btn" data-pkg="addon"><span>Add-on anfragen</span></a>
+      </div>
+    </div>
+
+    <!-- ROI -->
+    <div class="roi-box r">
+      <span class="roi-num">Schon ein zusätzlicher Auftrag im Monat kann die Kosten decken.</span>
+      <p>Ein durchschnittlicher Auftrag bringt oft <strong>deutlich mehr</strong> ein als die monatlichen Kosten. Alles darüber ist zusätzlicher Gewinn – ohne dass du mehr arbeiten musst.</p>
+      <a href="#contact" class="btn"><span>Jetzt prüfen, was für dich möglich ist</span></a>
+    </div>
+
+  </div>
+</section>
+
+<!-- PARTNER LOGOS -->
+<section class="sec-alt partners-section">
+  <div class="wrap">
+    <p class="partners-label r">Wir arbeiten mit den besten Tools</p>
+    <div class="partners-grid">
+
+      <!-- Meta -->
+      <div class="partner-badge r d1">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" fill="#1877F2"/>
+          <path d="M8.5 9.5C8.5 8.119 9.369 7 10.5 7c.8 0 1.4.45 1.9 1.1l1.65 2.15 1.65-2.15C16.2 7.45 16.8 7 17.5 7c1.131 0 2 1.119 2 2.5 0 .8-.25 1.5-.7 2.05L16 15H8l-2.8-3.45C4.75 11 4.5 10.3 4.5 9.5z" fill="white"/>
+        </svg>
+        <span class="partner-name">Meta Ads</span>
+      </div>
+
+      <!-- Facebook -->
+      <div class="partner-badge r d1">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#1877F2">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        <span class="partner-name">Facebook</span>
+      </div>
+
+      <!-- Instagram -->
+      <div class="partner-badge r d2">
+        <svg width="22" height="22" viewBox="0 0 24 24">
+          <defs>
+            <linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#f09433"/>
+              <stop offset="25%" stop-color="#e6683c"/>
+              <stop offset="50%" stop-color="#dc2743"/>
+              <stop offset="75%" stop-color="#cc2366"/>
+              <stop offset="100%" stop-color="#bc1888"/>
+            </linearGradient>
+          </defs>
+          <rect width="24" height="24" rx="5" fill="url(#ig)"/>
+          <rect x="6" y="6" width="12" height="12" rx="3" fill="none" stroke="white" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="3" fill="none" stroke="white" stroke-width="1.5"/>
+          <circle cx="17" cy="7" r="1" fill="white"/>
+        </svg>
+        <span class="partner-name">Instagram</span>
+      </div>
+
+      <!-- Google Business -->
+      <div class="partner-badge r d2">
+        <svg width="22" height="22" viewBox="0 0 24 24">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        <span class="partner-name">Google Business</span>
+      </div>
+
+      <!-- WhatsApp -->
+      <div class="partner-badge r d3">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        <span class="partner-name">WhatsApp Business</span>
+      </div>
+
+      <!-- Make.com -->
+      <div class="partner-badge r d3">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="11" fill="#6D00CC"/>
+          <path d="M7 12l3 3 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="partner-name">Make.com</span>
+      </div>
+
+      <!-- Tally -->
+      <div class="partner-badge r d4">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <rect width="24" height="24" rx="6" fill="#212121"/>
+          <text x="4" y="17" font-size="13" font-weight="800" fill="white" font-family="Arial">T</text>
+        </svg>
+        <span class="partner-name">Tally Forms</span>
+      </div>
+
+      <!-- Airtable -->
+      <div class="partner-badge r d4">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <rect width="24" height="24" rx="5" fill="#FCB400"/>
+          <rect x="4" y="6" width="16" height="4" rx="1" fill="white"/>
+          <rect x="4" y="12" width="9" height="4" rx="1" fill="white" opacity=".8"/>
+          <rect x="15" y="12" width="5" height="4" rx="1" fill="white" opacity=".6"/>
+        </svg>
+        <span class="partner-name">Airtable</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="sec">
+  <div class="wrap">
+
+    <div class="contact-grid">
+
+      <div class="contact-sticky r">
+        <span class="tag">Kostenlose Beratung</span>
+        <h2 class="sec-title">Finde heraus, wie viele Anfragen bei dir möglich sind</h2>
+        <p class="sec-desc" style="margin-top:14px;">In wenigen Minuten weißt du, ob sich das für dich lohnt. Kein Druck, kein Kleingedrucktes.</p>
+        <div class="contact-detail">
+          <div class="c-item">
+            <div class="c-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <circle cx="12" cy="11" r="3"/>
+              </svg>
+            </div>
+            <span>Hamburg, Deutschland</span>
+          </div>
+          <div class="c-item">
+            <div class="c-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <span>hallo@nahmatic.de</span>
+          </div>
+        </div>
+      </div>
+
+      <form id="contact-form" class="r d1" onsubmit="handleSubmit(event)">
+
+        <div class="frow">
+          <div class="fg">
+            <label for="f-name">Name *</label>
+            <input type="text" id="f-name" name="name" placeholder="Max Mustermann" required>
+          </div>
+          <div class="fg">
+            <label for="f-phone">Telefon</label>
+            <input type="tel" id="f-phone" name="phone" placeholder="+49 40 123 456">
+          </div>
+        </div>
+
+        <div class="fg">
+          <label for="f-email">E-Mail *</label>
+          <input type="email" id="f-email" name="email" placeholder="max@beispiel.de" required>
+        </div>
+
+        <div class="fg">
+          <label for="f-pkg">Welches Paket interessiert dich?</label>
+          <select id="f-pkg" name="package">
+            <option value="">Bitte wählen …</option>
+            <option value="basis">Basis – 300–400 € Setup + 200–250 €/Monat</option>
+            <option value="premium">Premium – 700–900 € Setup + 250–300 €/Monat</option>
+            <option value="addon">Add-on Automatisierung – 200–300 € + 60–80 €/Monat</option>
+            <option value="unsure">Noch unsicher – einfach beraten lassen</option>
+          </select>
+        </div>
+
+        <div class="fg">
+          <label for="f-msg">Was ist dein größtes Problem gerade?</label>
+          <textarea id="f-msg" name="message" placeholder="Elektriker in Hamburg, kaum Anfragen online, keine Website … erzähl kurz wie's bei dir aussieht."></textarea>
+        </div>
+
+        <button type="submit" class="btn form-submit"><span>Nachricht senden</span></button>
+        <p id="form-ok">✓ Nachricht gesendet. Wir melden uns innerhalb von 24 Stunden.</p>
+
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-i">
+    <div class="foot-logo">nah<em>matic</em></div>
+    <p class="foot-copy">© 2026 Nahmatic. Hamburg.</p>
+    <div class="foot-links">
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('s', scrollY > 60), { passive: true });
+
+  document.getElementById('burger').addEventListener('click', () => document.getElementById('mob').classList.add('open'));
+  document.getElementById('mob-close').addEventListener('click', closeMob);
+  function closeMob() { document.getElementById('mob').classList.remove('open'); }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.r').forEach(el => io.observe(el));
+
+  requestAnimationFrame(() => {
+    document.querySelectorAll('#hero .r').forEach((el, i) =>
+      setTimeout(() => el.classList.add('on'), 100 + i * 80)
+    );
+  });
+
+  document.querySelectorAll('.price-btn, [data-pkg]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sel = document.getElementById('f-pkg');
+      if (sel && btn.dataset.pkg) sel.value = btn.dataset.pkg;
+    });
+  });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const submitBtn = e.target.querySelector('.form-submit');
+    submitBtn.querySelector('span').textContent = 'Wird gesendet …';
+    submitBtn.disabled = true;
+    setTimeout(() => {
+      submitBtn.style.display = 'none';
+      document.getElementById('form-ok').style.display = 'block';
+      e.target.reset();
+    }, 900);
+  }
+</script>
+
+</body>
+</html>
