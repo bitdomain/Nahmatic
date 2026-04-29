@@ -725,6 +725,166 @@
       .foot-links { justify-content: center; }
       .partners-grid { gap: 10px; }
     }
+
+    /* RECHNER */
+    .calc-simple {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .calc-frage {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .calc-frage-text {
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+    .calc-slider-wrap {
+      padding: 0 8px;
+    }
+    .calc-slider-wrap input[type=range] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      outline: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+    .calc-slider-wrap input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--teal);
+      cursor: pointer;
+      border: 4px solid var(--bg);
+      box-shadow: 0 0 0 1.5px var(--teal);
+    }
+    .calc-slider-wrap input[type=range]::-moz-range-thumb {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--teal);
+      cursor: pointer;
+      border: 4px solid var(--bg);
+    }
+    .calc-slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: .78rem;
+      color: var(--muted);
+      margin-top: 8px;
+      padding: 0 2px;
+    }
+    .calc-auftrag-display {
+      font-family: var(--display);
+      font-size: clamp(2.8rem, 8vw, 5rem);
+      font-weight: 800;
+      color: var(--teal);
+      margin-top: 20px;
+      line-height: 1;
+    }
+
+    .calc-ergebnis-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .calc-pfeil {
+      text-align: center;
+      font-size: 1.4rem;
+      color: var(--muted);
+      line-height: 1;
+    }
+    .calc-ergebnis-karte {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 28px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .calc-ergebnis-karte.haupt {
+      border-color: var(--teal-bdr);
+      background: var(--teal-dim);
+    }
+    .calc-ek-icon {
+      font-size: 1.4rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--muted);
+    }
+    .calc-ergebnis-karte.haupt .calc-ek-icon {
+      background: rgba(232,136,10,.15);
+      color: var(--teal);
+    }
+    .calc-ek-label {
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .calc-ek-num {
+      font-family: var(--display);
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.1;
+    }
+    .calc-ergebnis-karte.haupt .calc-ek-num { color: var(--teal); }
+    .calc-ek-sub {
+      font-size: .82rem;
+      color: var(--muted);
+      font-weight: 300;
+      margin-top: 2px;
+    }
+    .calc-fazit {
+      background: var(--bg-card);
+      border-left: 3px solid var(--teal);
+      border-radius: 0 8px 8px 0;
+      padding: 18px 22px;
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-top: 4px;
+    }
+    .calc-fazit strong { color: var(--text); font-weight: 600; }
+    .calc-kosten-breakdown {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+    .calc-kosten-zeile {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      font-size: .82rem;
+      color: var(--muted);
+      font-weight: 300;
+    }
+    .calc-kosten-zeile span:last-child {
+      font-weight: 500;
+      color: var(--text);
+      white-space: nowrap;
+    }
   </style>
 </head>
 <body>
@@ -739,6 +899,7 @@
       <li><a href="#problem">Das Problem</a></li>
       <li><a href="#how">Wie's funktioniert</a></li>
       <li><a href="#pricing">Pakete</a></li>
+      <li><a href="#rechner">Rechner</a></li>
       <li><a href="#contact">Kontakt</a></li>
     </ul>
     <a href="#contact" class="btn nav-cta-wrap"><span>Anfragen prüfen</span></a>
@@ -948,6 +1109,68 @@
       <span class="roi-num">Schon ein zusätzlicher Auftrag im Monat kann die Kosten decken.</span>
       <p>Ein durchschnittlicher Auftrag bringt oft <strong>deutlich mehr</strong> ein als die monatlichen Kosten. Alles darüber ist zusätzlicher Gewinn – ohne dass du mehr arbeiten musst.</p>
       <a href="#contact" class="btn"><span>Jetzt prüfen, was für dich möglich ist</span></a>
+    </div>
+
+  </div>
+</section>
+
+<!-- RECHNER -->
+<section id="rechner" class="sec sec-alt">
+  <div class="wrap">
+
+    <div class="sec-head c r">
+      <span class="tag">Lohnt sich das für mich?</span>
+      <h2 class="sec-title">Zwei Fragen – und du siehst es sofort</h2>
+      <p class="sec-desc">Keine Tabellen, kein Fachwissen nötig. Einfach schieben und schauen.</p>
+    </div>
+
+    <div class="calc-simple r d1">
+
+      <div class="calc-frage">
+        <p class="calc-frage-text">Was verdienst du ungefähr an einem normalen Auftrag?</p>
+        <div class="calc-slider-wrap">
+          <input type="range" min="200" max="5000" step="50" value="1000" id="cr-auftrag" oninput="nahCalc()">
+          <div class="calc-slider-labels"><span>200 €</span><span>5.000 €</span></div>
+        </div>
+        <div class="calc-auftrag-display" id="cv-auftrag">1.000 €</div>
+      </div>
+
+      <div class="calc-ergebnis-wrap">
+
+        <div class="calc-ergebnis-karte r d2">
+          <div class="calc-ek-icon">−</div>
+          <div style="width:100%">
+            <div class="calc-ek-label">Deine Kosten pro Monat</div>
+            <div class="calc-ek-num">625 €</div>
+            <div class="calc-kosten-breakdown">
+              <div class="calc-kosten-zeile">
+                <span>Nahmatic-Betreuung</span>
+                <span>225 €</span>
+              </div>
+              <div class="calc-kosten-zeile">
+                <span>Werbebudget (geht direkt an Facebook, nicht an uns)</span>
+                <span>400 €</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-pfeil">↓</div>
+
+        <div class="calc-ergebnis-karte haupt r d3">
+          <div class="calc-ek-icon">+</div>
+          <div>
+            <div class="calc-ek-label" id="cr-kunden-label">Dein Gewinn – wenn wir dir 3 neue Kunden bringen</div>
+            <div class="calc-ek-num" id="cr-gewinn">2.375 €</div>
+            <div class="calc-ek-sub">nach Abzug aller Kosten, jeden Monat</div>
+          </div>
+        </div>
+
+        <div class="calc-fazit r d4">
+          <strong id="cr-fazit-1">3 neue Kunden pro Monat</strong> <span id="cr-fazit-2">– das ist unser realistisches Ziel für den Einstieg. Alles darüber ist Bonus.</span>
+        </div>
+
+      </div>
     </div>
 
   </div>
@@ -1175,6 +1398,26 @@
       e.target.reset();
     }, 900);
   }
+  function nahCalc() {
+    const auftrag = +document.getElementById('cr-auftrag').value;
+    document.getElementById('cv-auftrag').textContent = auftrag.toLocaleString('de-DE') + ' €';
+
+    let kunden;
+    if      (auftrag <= 500)  kunden = 6;
+    else if (auftrag <= 1000) kunden = 4;
+    else if (auftrag <= 2500) kunden = 3;
+    else                      kunden = 2;
+
+    const kosten = 625;
+    const gewinn = (auftrag * kunden) - kosten;
+
+    document.getElementById('cr-gewinn').textContent = gewinn.toLocaleString('de-DE') + ' € Gewinn';
+    document.getElementById('cr-kunden-label').textContent = 'Dein Gewinn – wenn wir dir ' + kunden + ' neue Kunden bringen';
+    document.getElementById('cr-fazit-1').textContent = kunden + ' neue Kunden pro Monat';
+    document.getElementById('cr-fazit-2').textContent = ' – das ist unser realistisches Ziel für dich. Alles darüber ist Bonus.';
+  }
+
+  nahCalc();
 </script>
 
 </body>
