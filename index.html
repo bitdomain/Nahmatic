@@ -29,7 +29,7 @@
       --max:       1200px;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       background: var(--bg);
@@ -39,6 +39,7 @@
       line-height: 1.65;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      width: 100%;
     }
 
     h1, h2, h3, h4 {
@@ -49,9 +50,9 @@
 
     .grain {
       position: fixed;
-      inset: -50%;
-      width: 200%;
-      height: 200%;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
       z-index: 9000;
       opacity: 0.036;
@@ -122,6 +123,8 @@
       inset: 0 0 auto;
       z-index: 500;
       padding: 22px 28px;
+      width: 100%;
+      box-sizing: border-box;
       transition: background .35s, border-color .35s, padding .35s, backdrop-filter .35s;
     }
     #nav.s {
@@ -220,7 +223,7 @@
       justify-content: center;
       padding: 140px 28px 110px;
       position: relative;
-      overflow: visible;
+      overflow: hidden;
     }
     #hero::before {
       content: '';
@@ -278,6 +281,8 @@
       line-height: 1.75;
     }
     .hero-cta { font-size: .9rem; padding: 17px 46px; }
+    .cta-short { display: none; }
+    .cta-long  { display: inline; }
 
     .scroll-ind {
       position: absolute;
@@ -715,15 +720,70 @@
     }
 
     @media (max-width: 600px) {
-      .sec { padding: 64px 0; }
-      .wrap { padding: 0 20px; }
-      .hero-h1 { letter-spacing: -.03em; }
-      .prob-card { padding: 32px 24px 36px; }
-      .price-card { padding: 32px 24px; }
-      .roi-box { padding: 32px 24px; }
-      .foot-i { flex-direction: column; text-align: center; }
+      .hero-cta-wrap { width: 100%; padding: 0 4px; }
+      .hero-cta { width: 100%; }
+      .sec { padding: 56px 0; }
+      .wrap { padding: 0 18px; }
+
+      /* Hero */
+      #hero { padding: 120px 24px 90px; }
+      .hero-inner { width: 100%; }
+      .hero-h1 { font-size: 2.4rem; letter-spacing: -.02em; }
+      .hero-sub { font-size: .95rem; margin-bottom: 36px; }
+      .hero-cta-wrap { width: 100%; padding: 0; }
+      .hero-cta { width: 100%; box-sizing: border-box; padding: 16px 20px; font-size: .82rem; text-align: center; }
+      .hero-label { font-size: .6rem; padding: 5px 14px; }
+      .cta-long { display: none; }
+      .cta-short { display: inline; }
+
+      /* Problem cards */
+      .prob-card { padding: 28px 20px 32px; }
+      .prob-num { font-size: 3.5rem; }
+
+      /* Pricing */
+      .price-card { padding: 28px 20px; }
+      .price-amount { font-size: 2.4rem; }
+      .feat-list { gap: 10px; }
+      .feat-list li { font-size: .84rem; }
+      .addon-card { padding: 24px 20px; }
+      .addon-title { font-size: 1rem; }
+      .roi-box { padding: 28px 20px; }
+      .roi-box p { font-size: .92rem; }
+
+      /* Partners */
+      .partners-grid { gap: 8px; }
+      .partner-badge { padding: 10px 16px; }
+      .partner-name { font-size: .8rem; }
+
+      /* Rechner */
+      .calc-simple { max-width: 100%; }
+      .calc-frage { margin-bottom: 36px; }
+      .calc-frage-text { font-size: 1rem; margin-bottom: 24px; }
+      .calc-auftrag-display { font-size: 3rem; }
+      .calc-ergebnis-karte { padding: 18px 16px; gap: 14px; }
+      .calc-ek-icon { width: 36px; height: 36px; font-size: 1.1rem; flex-shrink: 0; }
+      .calc-ek-num { font-size: 1.4rem; }
+      .calc-ek-label { font-size: .65rem; }
+      .calc-kosten-zeile { font-size: .78rem; flex-wrap: wrap; gap: 2px 8px; }
+      .calc-fazit { font-size: .88rem; padding: 14px 16px; }
+
+      /* Contact form */
+      input, select, textarea { font-size: 16px; } /* prevents iOS zoom */
+      .form-submit { padding: 16px 24px; }
+      .contact-detail { gap: 10px; }
+      .sec-title { font-size: 1.8rem; }
+
+      /* Footer */
+      .foot-i { flex-direction: column; text-align: center; gap: 12px; }
       .foot-links { justify-content: center; }
-      .partners-grid { gap: 10px; }
+    }
+
+    /* Extra small */
+    @media (max-width: 380px) {
+      .hero-h1 { font-size: 2rem; }
+      .wrap { padding: 0 14px; }
+      .calc-pkg { flex-direction: column; }
+      .price-card, .prob-card { padding: 22px 16px; }
     }
 
     /* RECHNER */
@@ -915,6 +975,7 @@
   <a href="#problem"  onclick="closeMob()">Das Problem</a>
   <a href="#how"      onclick="closeMob()">Wie's funktioniert</a>
   <a href="#pricing"  onclick="closeMob()">Pakete</a>
+  <a href="#rechner"  onclick="closeMob()">Rechner</a>
   <a href="#contact"  onclick="closeMob()" style="color:var(--teal)">Anfragen prüfen →</a>
 </div>
 
@@ -933,7 +994,9 @@
       Wir sorgen dafür, dass Hausbesitzer aus deiner Umgebung aktiv bei dir anfragen – während du auf der Baustelle bist.
     </p>
 
-    <a href="#contact" class="btn hero-cta r d3"><span>Jetzt prüfen, wie viele Anfragen möglich sind</span></a>
+    <div class="hero-cta-wrap r d3">
+      <a href="#contact" class="btn hero-cta"><span class="cta-long">Jetzt prüfen, wie viele Anfragen möglich sind</span><span class="cta-short">Jetzt kostenlos prüfen</span></a>
+    </div>
   </div>
 
   <div class="scroll-ind">
@@ -1108,7 +1171,7 @@
     <div class="roi-box r">
       <span class="roi-num">Schon ein zusätzlicher Auftrag im Monat kann die Kosten decken.</span>
       <p>Ein durchschnittlicher Auftrag bringt oft <strong>deutlich mehr</strong> ein als die monatlichen Kosten. Alles darüber ist zusätzlicher Gewinn – ohne dass du mehr arbeiten musst.</p>
-      <a href="#contact" class="btn"><span>Jetzt prüfen, was für dich möglich ist</span></a>
+      <a href="#contact" class="btn"><span class="cta-long">Jetzt prüfen, was für dich möglich ist</span><span class="cta-short">Jetzt prüfen</span></a>
     </div>
 
   </div>
